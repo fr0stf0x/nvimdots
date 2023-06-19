@@ -11,7 +11,7 @@ settings["format_on_save"] = true
 
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
-settings["format_notify"] = true
+settings["format_notify"] = false
 
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
@@ -23,7 +23,7 @@ settings["diagnostics_virtual_text"] = true
 --  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
 -- NOTE: This entry only works when `diagnostics_virtual_text` is true.
 ---@type "Error"|"Warning"|"Information"|"Hint"
-settings["diagnostics_level"] = "Hint"
+settings["diagnostics_level"] = "Error"
 
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
 ---@type string[]
@@ -81,13 +81,15 @@ settings["server_formatting_block_list"] = {
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
 settings["lsp_deps"] = {
-	"bashls",
-	"clangd",
+	-- "bashls",
+	-- "clangd",
 	"html",
 	"jsonls",
+	"unocss",
 	"lua_ls",
-	"pylsp",
-	-- "gopls",
+	"eslint",
+	-- "pylsp",
+	"gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.
@@ -96,12 +98,12 @@ settings["lsp_deps"] = {
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
 settings["null_ls_deps"] = {
-	"clang_format",
+	-- "clang_format",
 	"prettier",
-	"rustfmt",
-	"shfmt",
+	-- "rustfmt",
+	-- "shfmt",
 	"stylua",
-	"vint",
+	-- "vint",
 }
 
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
@@ -109,9 +111,9 @@ settings["null_ls_deps"] = {
 -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 ---@type string[]
 settings["dap_deps"] = {
-	"codelldb", -- C-Family
-	"delve", -- Go
-	"python", -- Python (debugpy)
+	-- "codelldb", -- C-Family
+	-- "delve", -- Go
+	-- "python", -- Python (debugpy)
 }
 
 return settings

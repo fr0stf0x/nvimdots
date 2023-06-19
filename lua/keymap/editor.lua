@@ -6,6 +6,11 @@ local map_callback = bind.map_callback
 local et = bind.escape_termcode
 
 local plug_map = {
+	-- format
+	["n|<leader>fm"] = map_callback(function()
+		vim.lsp.buf.format({ async = true })
+	end):with_desc("edit: LSP format"),
+
 	-- Plugin: accelerate-jk
 	["n|j"] = map_callback(function()
 		return et("<Plug>(accelerated_jk_gj)")
@@ -20,7 +25,8 @@ local plug_map = {
 	["n|<leader>sd"] = map_cu("SessionDelete"):with_noremap():with_silent():with_desc("session: Delete"),
 
 	-- Plugin: nvim-bufdel
-	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
+	["n|<leader>x"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
+	["n|<leader>X"] = map_cr("BufDelOthers"):with_noremap():with_silent():with_desc("buffer: Close other buffers"),
 
 	-- Plugin: clever-f
 	["n|;"] = map_callback(function()
@@ -30,8 +36,15 @@ local plug_map = {
 		return et("<Plug>(clever-f-repeat-back)")
 	end):with_expr(),
 
+	["n|<A-O>"] = map_callback(function()
+		local ts = require("typescript").actions
+		ts.addMissingImports({ sync = true })
+		ts.organizeImports()
+		ts.removeUnused()
+	end):with_desc("Organize imports"),
+
 	-- Plugin: comment.nvim
-	["n|gcc"] = map_callback(function()
+	["n|<C-/>"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
 				or et("<Plug>(comment_toggle_linewise_count)")
 		end)
@@ -39,7 +52,7 @@ local plug_map = {
 		:with_noremap()
 		:with_expr()
 		:with_desc("edit: Toggle comment for line"),
-	["n|gbc"] = map_callback(function()
+	["n|<C-\\>"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)")
 				or et("<Plug>(comment_toggle_blockwise_count)")
 		end)
@@ -47,19 +60,19 @@ local plug_map = {
 		:with_noremap()
 		:with_expr()
 		:with_desc("edit: Toggle comment for block"),
-	["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for line with operator"),
-	["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("edit: Toggle comment for block with operator"),
-	["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
+	-- ["n|<C-/>"] = map_cmd("<Plug>(comment_toggle_linewise)")
+	-- 	:with_silent()
+	-- 	:with_noremap()
+	-- 	:with_desc("edit: Toggle comment for line with operator"),
+	-- ["n|<C-\\>"] = map_cmd("<Plug>(comment_toggle_blockwise)")
+	-- 	:with_silent()
+	-- 	:with_noremap()
+	-- 	:with_desc("edit: Toggle comment for block with operator"),
+	["v|<C-/>"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
 		:with_silent()
 		:with_noremap()
 		:with_desc("edit: Toggle comment for line with selection"),
-	["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
+	["v|<C-\\>"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
 		:with_silent()
 		:with_noremap()
 		:with_desc("edit: Toggle comment for block with selection"),
@@ -82,8 +95,8 @@ local plug_map = {
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
 
 	-- Plugin: tabout
-	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("edit: Goto end of pair"),
-	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap():with_desc("edit: Goto begin of pair"),
+	-- ["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("edit: Goto end of pair"),
+	-- ["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap():with_desc("edit: Goto begin of pair"),
 
 	-- Plugin suda.vim
 	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),

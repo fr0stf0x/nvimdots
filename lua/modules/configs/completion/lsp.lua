@@ -98,6 +98,11 @@ return function()
 	})
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.textDocument.foldingRange = { -- required by nvim-ufo
+		dynamicRegistration = false,
+		lineFoldingOnly = true,
+	}
+
 	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

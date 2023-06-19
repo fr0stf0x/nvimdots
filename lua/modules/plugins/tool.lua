@@ -27,8 +27,10 @@ tool["ibhagwan/smartyank.nvim"] = {
 	event = "BufReadPost",
 	config = require("tool.smartyank"),
 }
+tool["kevinhwang91/nvim-ufo"] = require("tool.nvim-ufo")
 tool["michaelb/sniprun"] = {
 	lazy = true,
+	enabled = false,
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
@@ -49,6 +51,7 @@ tool["akinsho/toggleterm.nvim"] = {
 }
 tool["folke/trouble.nvim"] = {
 	lazy = true,
+	enabled = false,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	config = require("tool.trouble"),
 }
@@ -113,6 +116,22 @@ tool["mfussenegger/nvim-dap"] = {
 		},
 		{ "jay-babu/mason-nvim-dap.nvim" },
 	},
+}
+
+tool["Wansmer/treesj"] = {
+	dependencies = { "nvim-treesitter" },
+	opts = {
+		use_default_keymaps = false,
+		max_join_length = 120,
+	},
+	keys = {
+		{ "<leader>ts", "<Cmd>TSJSplit<CR>", desc = "TreeSJ Split" },
+		{ "<leader>tj", "<Cmd>TSJJoin<CR>", desc = "TreeSJ Join" },
+		{ "<leader>m", "<Cmd>TSJToggle<CR>", desc = "TreeSJ Toggle" },
+	},
+	config = function(_, opts)
+		require("treesj").setup(opts)
+	end,
 }
 
 return tool

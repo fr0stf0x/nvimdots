@@ -64,12 +64,14 @@ function Lazy:load_lazy()
 
 	local clone_prefix = use_ssh and "git@github.com:%s.git" or "https://github.com/%s.git"
 	local lazy_settings = {
+
 		root = data_dir .. "lazy", -- directory where plugins will be installed
 		git = {
 			-- log = { "-10" }, -- show the last 10 commits
 			timeout = 300,
 			url_format = clone_prefix,
 		},
+		defaults = { lazy = true, version = nil },
 		install = {
 			-- install missing plugins on startup. This doesn't increase startup time.
 			missing = true,

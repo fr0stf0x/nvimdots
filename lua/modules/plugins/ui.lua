@@ -36,6 +36,10 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	event = "BufReadPost",
 	config = require("ui.indent-blankline"),
 }
+ui["luukvbaal/statuscol.nvim"] = {
+	event = "VeryLazy",
+	config = require("ui.statuscol"),
+}
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
@@ -43,11 +47,13 @@ ui["nvim-lualine/lualine.nvim"] = {
 }
 ui["zbirenbaum/neodim"] = {
 	lazy = true,
+	enabled = false,
 	event = "LspAttach",
 	config = require("ui.neodim"),
 }
 ui["karb94/neoscroll.nvim"] = {
 	lazy = true,
+	enabled = false,
 	event = "BufReadPost",
 	config = require("ui.neoscroll"),
 }
@@ -62,6 +68,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["folke/paint.nvim"] = {
 	lazy = true,
+	enabled = false,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }

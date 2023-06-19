@@ -3,9 +3,24 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
+vim.cmd([[
+  xnoremap <expr> p 'pgv"'.v:register.'y'
+]])
+
+-- console.log
+vim.cmd([[
+  nnoremap <Leader>L "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
+
+  xnoremap <Leader>L "ayoconsole.log('<C-R>a:', <C-R>a);<Esc>
+]])
+
 local core_map = {
 	-- Suckless
-	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
+	["n|<C-c>"] = map_cmd("<cmd> %y+ <cr>"):with_noremap():with_desc("Copy file"),
+	["nv|c"] = map_cmd('"_c'):with_noremap(),
+	["nv|C"] = map_cmd('"_C'):with_noremap(),
+	["nv|x"] = map_cmd('"_x'):with_noremap(),
+	["nv|X"] = map_cmd('"_X'):with_noremap(),
 	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("edit: Save file"),
 	["n|Y"] = map_cmd("y$"):with_desc("edit: Yank text to EOL"),
 	["n|D"] = map_cmd("d$"):with_desc("edit: Delete text to EOL"),
@@ -35,7 +50,16 @@ local core_map = {
 	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("edit: Delete previous block"),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
+	["i|<C-h>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
+	["i|<A-h>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
+	["i|<C-l>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Move cursor to right"),
+	["i|<A-l>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Move cursor to right"),
+	["i|<C-j>"] = map_cmd("<Down>"):with_noremap():with_desc("edit: Move cursor to down"),
+	["i|<A-j>"] = map_cmd("<Down>"):with_noremap():with_desc("edit: Move cursor to down"),
+	["i|<C-k>"] = map_cmd("<Up>"):with_noremap():with_desc("edit: Move cursor to up"),
+	["i|<A-k>"] = map_cmd("<Up>"):with_noremap():with_desc("edit: Move cursor to up"),
 	["i|<C-a>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("edit: Move cursor to line start"),
+	["i|<C-e>"] = map_cmd("<End>"):with_noremap():with_desc("edit: Move cursor to line end"),
 	["i|<C-s>"] = map_cmd("<Esc>:w<CR>"):with_desc("edit: Save file"),
 	["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"):with_desc("edit: Save file and quit"),
 	-- Command mode

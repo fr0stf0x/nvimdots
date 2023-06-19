@@ -13,12 +13,12 @@ return function()
 		hijack_cursor = true,
 		hijack_netrw = true,
 		hijack_unnamed_buffer_when_opening = true,
-		open_on_tab = false,
+		open_on_tab = true,
 		respect_buf_cwd = false,
 		sort_by = "name",
 		sync_root_with_cwd = true,
 		view = {
-			adaptive_size = false,
+			adaptive_size = true,
 			centralize_selection = false,
 			width = 30,
 			side = "left",
@@ -106,7 +106,7 @@ return function()
 		},
 		filters = {
 			dotfiles = false,
-			custom = { ".DS_Store" },
+			custom = { ".DS_Store", "^\\.git$" },
 			exclude = {},
 		},
 		actions = {
@@ -149,7 +149,7 @@ return function()
 		git = {
 			enable = true,
 			ignore = false,
-			show_on_dirs = true,
+			-- show_on_dirs = true,
 			timeout = 400,
 		},
 		trash = {

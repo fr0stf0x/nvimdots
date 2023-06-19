@@ -7,7 +7,9 @@ editor["rainbowhxch/accelerated-jk.nvim"] = {
 }
 editor["rmagatti/auto-session"] = {
 	lazy = true,
-	cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
+	event = "BufWinEnter",
+	-- priority = 999,
+	-- cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
 	config = require("editor.auto-session"),
 }
 editor["m4xshen/autoclose.nvim"] = {
@@ -67,7 +69,13 @@ editor["lambdalisue/suda.vim"] = {
 	cmd = { "SudaRead", "SudaWrite" },
 	config = require("editor.suda"),
 }
-
+editor["echasnovski/mini.move"] = {
+	opts = {},
+	keys = { "<M-h>", "<M-l>", "<M-j>", "<M-k>" },
+	config = function(_, opts)
+		require("mini.move").setup(opts)
+	end,
+}
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------

@@ -1,11 +1,5 @@
 local lang = {}
 
-lang["fatih/vim-go"] = {
-	lazy = true,
-	ft = "go",
-	build = ":GoInstallBinaries",
-	config = require("lang.vim-go"),
-}
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
 	ft = "rust",
@@ -26,5 +20,17 @@ lang["iamcco/markdown-preview.nvim"] = {
 lang["chrisbra/csv.vim"] = {
 	lazy = true,
 	ft = "csv",
+}
+lang["jose-elias-alvarez/typescript.nvim"] = {
+	dependencies = "neovim/nvim-lspconfig",
+	event = "LspAttach",
+	config = function()
+		require("typescript").setup({
+			server = {
+				root_dir = require("lspconfig").util.root_pattern("package.json"),
+				single_file_support = false,
+			},
+		})
+	end,
 }
 return lang
