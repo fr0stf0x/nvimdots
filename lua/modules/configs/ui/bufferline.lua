@@ -1,9 +1,11 @@
 return function()
 	local icons = { ui = require("modules.utils.icons").get("ui") }
+	local bufferline = require("bufferline")
 
 	local opts = {
 		options = {
 			number = nil,
+			style_preset = bufferline.style_preset.no_italic,
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
 			left_trunc_marker = icons.ui.Left,
@@ -20,10 +22,10 @@ return function()
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
 			separator_style = "thin",
-			diagnostics = "nvim_lsp",
-			diagnostics_indicator = function(count)
-				return "(" .. count .. ")"
-			end,
+			-- diagnostics = "nvim_lsp",
+			-- diagnostics_indicator = function(count)
+			-- 	return "(" .. count .. ")"
+			-- end,
 			offsets = {
 				{
 					filetype = "NvimTree",
@@ -49,7 +51,7 @@ return function()
 
 		local catppuccin_hl_overwrite = {
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
-				styles = { "italic", "bold" },
+				styles = { "bold" },
 				custom = {
 					mocha = {
 						-- Hint
@@ -67,5 +69,5 @@ return function()
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
 	end
 
-	require("bufferline").setup(opts)
+	bufferline.setup(opts)
 end

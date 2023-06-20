@@ -61,6 +61,15 @@ return function()
 
 	local leader = " "
 	dashboard.section.buttons.val = {
+		-- button("space s r", "󰑙 Restore session", leader, nil, {
+		-- 	noremap = true,
+		-- 	silent = true,
+		-- 	nowait = true,
+		-- 	callback = function()
+		-- 		vim.api.nvim_command("SessionLensToggle")
+		-- 	end,
+		-- }),
+
 		button("space f c", " Scheme change", leader, nil, {
 			noremap = true,
 			silent = true,

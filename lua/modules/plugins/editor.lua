@@ -8,14 +8,17 @@ editor["rainbowhxch/accelerated-jk.nvim"] = {
 editor["rmagatti/auto-session"] = {
 	lazy = true,
 	event = "BufWinEnter",
-	-- priority = 999,
-	-- cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
+	cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
 	config = require("editor.auto-session"),
 }
-editor["m4xshen/autoclose.nvim"] = {
-	lazy = true,
+editor["windwp/nvim-autopairs"] = {
 	event = "InsertEnter",
-	config = require("editor.autoclose"),
+	config = function()
+		local npairs = require("nvim-autopairs")
+		npairs.setup({
+			check_ts = true,
+		})
+	end,
 }
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
@@ -47,6 +50,7 @@ editor["sindrets/diffview.nvim"] = {
 }
 editor["junegunn/vim-easy-align"] = {
 	lazy = true,
+	enabled = false,
 	cmd = "EasyAlign",
 }
 editor["phaazon/hop.nvim"] = {
@@ -54,6 +58,13 @@ editor["phaazon/hop.nvim"] = {
 	branch = "v2",
 	event = "BufReadPost",
 	config = require("editor.hop"),
+}
+editor["ggandor/leap.nvim"] = {
+	dependencies = "tpope/vim-repeat",
+	event = "BufReadPost",
+	config = function()
+		require("leap").add_default_mappings()
+	end,
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
@@ -90,8 +101,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{ "nvim-treesitter/nvim-treesitter-context" },
-		{ "mrjones2014/nvim-ts-rainbow" },
+		{ "HiPhish/nvim-ts-rainbow2" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },

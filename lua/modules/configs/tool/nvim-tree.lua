@@ -18,7 +18,7 @@ return function()
 		sort_by = "name",
 		sync_root_with_cwd = true,
 		view = {
-			adaptive_size = true,
+			adaptive_size = false,
 			centralize_selection = false,
 			width = 30,
 			side = "left",

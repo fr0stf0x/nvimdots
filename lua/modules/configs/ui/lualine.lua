@@ -107,14 +107,29 @@ return function()
 			theme = "catppuccin",
 			disabled_filetypes = {},
 			component_separators = "|",
-			section_separators = { left = "", right = "" },
+			-- section_separators = { left = "", right = "" },
+			section_separators = { left = " ", right = " " },
 		},
 		sections = {
-			lualine_a = { { "mode" } },
-			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { lspsaga_symbols },
+			lualine_a = {
+				{
+					"mode",
+					fmt = function(str)
+						return str:sub(1, 1)
+					end,
+				},
+			},
+			-- lualine_c = { lspsaga_symbols },
+			lualine_b = {
+				{ get_cwd },
+				{ "branch" },
+				{ "diff", source = diff_source },
+			},
+			lualine_c = {
+				lspsaga_symbols,
+			},
 			lualine_x = {
-				{ escape_status },
+				-- { escape_status },
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
@@ -125,12 +140,12 @@ return function()
 						hint = icons.diagnostics.Hint_alt,
 					},
 				},
-				{ get_cwd },
 			},
 			lualine_y = {
 				{ "filetype", colored = true, icon_only = true },
 				{ python_venv },
 				{ "encoding" },
+				{ "filesize" },
 				{
 					"fileformat",
 					icons_enabled = true,
@@ -141,7 +156,9 @@ return function()
 					},
 				},
 			},
-			lualine_z = { "progress", "location" },
+			lualine_z = { --[[ "progress", ]]
+				"location",
+			},
 		},
 		inactive_sections = {
 			lualine_a = {},

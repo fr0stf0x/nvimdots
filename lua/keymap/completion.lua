@@ -1,6 +1,6 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
-local map_cu = bind.map_cu
+-- local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
@@ -9,7 +9,7 @@ local plug_map = {
 }
 bind.nvim_load_mapping(plug_map)
 
-function diagnostic_goto(next, severity)
+local function diagnostic_goto(next, severity)
 	local diagnostic = require("lspsaga.diagnostic")
 	severity = severity and vim.diagnostic.severity[severity] or nil
 
@@ -29,7 +29,7 @@ function mapping.lsp(buf)
 		-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 		["n|<leader>li"] = map_cr("LspInfo"):with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
-		["n|go"] = map_cr("Lspsaga outline"):with_buffer(buf):with_desc("lsp: Toggle outline"),
+		["n|<leader>o"] = map_cr("Lspsaga outline"):with_buffer(buf):with_desc("lsp: Toggle outline"),
 		["n|[w"] = map_callback(diagnostic_goto(false, "WARN")):with_buffer(buf):with_desc("lsp: Prev warning"),
 		["n|]w"] = map_callback(diagnostic_goto(true, "WARN")):with_buffer(buf):with_desc("lsp: Next warning"),
 		["n|]e"] = map_callback(diagnostic_goto(false, "ERROR")):with_buffer(buf):with_desc("lsp: Prev error"),
